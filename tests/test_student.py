@@ -11,6 +11,16 @@ def test_init():
     assert ada.level == level
     assert ada.courses == courses
 
+def test_init_for_edge_cases():
+    name = "Ada Lovelace"
+    level = "sophomore"
+
+    ada = Student(name=name, level=level)
+
+    assert ada.name == name
+    assert ada.level == level
+    assert ada.courses == []
+
 def test_add_class():
     new_class = 'Intro to Feminism'
     charles = Student("Charles Babbage", "senior", ["mechanical engineering"])
@@ -40,5 +50,34 @@ def test_get_student_with_more_classes():
         "sophomore",
         ["mathematics", "foundations of computing"]
     )
+    #ACT
+    results = get_student_with_more_classes(charles, ada)
 
-    # TODO: write assertions
+    # TODO: write assertions 
+    assert results == ada
+
+def test_get_student_with_more_classes_unordered():
+    charles = Student("Charles Babbage", "senior", ["mechanical engineering"])
+    ada = Student(
+        "Ada Lovelace",
+        "sophomore",
+        ["mathematics", "foundations of computing"]
+    )
+    #ACT
+    results = get_student_with_more_classes(ada, charles)
+
+    # TODO: write assertions 
+    assert results == ada
+
+def test_get_student_with_more_classes_with_tie():
+    charles = Student("Charles Babbage", "senior", ["mathematics", "foundations of computing"])
+    ada = Student(
+        "Ada Lovelace",
+        "sophomore",
+        ["mathematics", "foundations of computing"]
+    )
+    #ACT
+    results = get_student_with_more_classes(ada, charles)
+
+    # TODO: write assertions 
+    assert results == [ada, charles]
